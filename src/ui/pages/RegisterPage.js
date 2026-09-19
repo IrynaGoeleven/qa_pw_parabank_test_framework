@@ -36,7 +36,9 @@ export class RegisterPage extends BasePage {
       await this.ssnField.fill(user.ssn);
       await this.usernameField.fill(user.username);
       await this.passwordField.fill(user.password);
-      await this.confirmPasswordField.fill(user.password);
+      await this.confirmPasswordField.fill(
+        user.confirmPassword ?? user.password,
+      );
     });
   }
 
@@ -62,5 +64,16 @@ export class RegisterPage extends BasePage {
         ),
       ).toBeVisible();
     });
+  }
+
+  async assertErrorMessageIsVisible(message) {
+    await this.step(
+      `Assert error message "${message}" is visible`,
+      async () => {
+        await expect(
+          this.page.getByText(message, { exact: true }),
+        ).toBeVisible();
+      },
+    );
   }
 }
