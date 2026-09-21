@@ -3,12 +3,14 @@ import { HomePage } from '../../src/ui/pages/HomePage';
 import { RegisterPage } from '../../src/ui/pages/RegisterPage';
 import { AccountsOverviewPage } from '../../src/ui/pages/AccountsOverviewPage';
 import { AccountServicesPanel } from '../../src/ui/components/AccountServicesPanel';
+import { ForgotLoginInfoPage } from '../../src/ui/pages/ForgotLoginInfoPage';
 
 export const test = base.extend<{
   homePage: HomePage;
   registerPage: RegisterPage;
   accountsOverviewPage: AccountsOverviewPage;
   accountServicesPanel: AccountServicesPanel;
+  forgotLoginInfoPage: ForgotLoginInfoPage;
 }>({
   homePage: async ({ page }, use) => {
     await use(new HomePage(page));
@@ -21,5 +23,8 @@ export const test = base.extend<{
   },
   accountServicesPanel: async ({ page }, use) => {
     await use(new AccountServicesPanel(page));
+  },
+  forgotLoginInfoPage: async ({ page }, use) => {
+    await use(new ForgotLoginInfoPage(page));
   },
 });

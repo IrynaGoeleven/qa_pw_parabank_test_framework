@@ -65,15 +65,4 @@ export class RegisterPage extends BasePage {
       ).toBeVisible();
     });
   }
-
-  async assertErrorMessageIsVisible(message) {
-    await this.step(
-      `Assert error message "${message}" is visible`,
-      async () => {
-        await expect(
-          this.page.getByText(message, { exact: true }),
-        ).toBeVisible();
-      },
-    );
-  }
 }

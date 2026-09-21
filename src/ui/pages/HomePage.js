@@ -60,4 +60,10 @@ export class HomePage extends BasePage {
       await expect(this.page.locator('#rightPanel .error')).toHaveText(message);
     });
   }
+
+  async clickForgotLoginInfoLink() {
+    await this.step('Click "Forgot login info?" link', async () => {
+      await this.forgotLoginInfoLink.click();
+    });
+  }
 }
