@@ -16,10 +16,6 @@ export function parseAmount(str) {
 
 export function formatAmount(amount) {
   const sign = amount < 0 ? '-' : '';
-  const absolute = Math.abs(amount).toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
 
-  return `${sign}$${absolute}`;
+  return `${sign}$${Math.abs(amount).toFixed(2)}`;
 }

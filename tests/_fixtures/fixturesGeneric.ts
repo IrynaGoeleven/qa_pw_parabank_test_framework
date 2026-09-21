@@ -52,4 +52,14 @@ export const test = base.extend<
     },
     { scope: 'test', auto: true },
   ],
+  blockStaticResources: [
+    async ({ page }, use) => {
+      await page.route(/\.(png|jpe?g|gif|svg|ico|woff2?)(\?.*)?$/i, route =>
+        route.abort(),
+      );
+
+      await use('blockStaticResources');
+    },
+    { scope: 'test', auto: true },
+  ],
 });
