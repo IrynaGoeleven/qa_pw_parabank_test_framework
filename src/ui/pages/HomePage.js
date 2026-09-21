@@ -30,4 +30,34 @@ export class HomePage extends BasePage {
       await expect(this.logInButton).toBeVisible();
     });
   }
+
+  async fillUsername(username) {
+    await this.step(`Fill username: ${username}`, async () => {
+      await this.usernameField.fill(username);
+    });
+  }
+
+  async fillPassword(password) {
+    await this.step('Fill password', async () => {
+      await this.passwordField.fill(password);
+    });
+  }
+
+  async clickLogInButton() {
+    await this.step('Click Log In button', async () => {
+      await this.logInButton.click();
+    });
+  }
+
+  async login(username, password) {
+    await this.fillUsername(username);
+    await this.fillPassword(password);
+    await this.clickLogInButton();
+  }
+
+  async assertLoginErrorMessage(message) {
+    await this.step(`Assert login error "${message}" is visible`, async () => {
+      await expect(this.page.locator('#rightPanel .error')).toHaveText(message);
+    });
+  }
 }
