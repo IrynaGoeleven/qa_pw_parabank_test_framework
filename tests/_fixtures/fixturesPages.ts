@@ -4,6 +4,7 @@ import { RegisterPage } from '../../src/ui/pages/RegisterPage';
 import { AccountsOverviewPage } from '../../src/ui/pages/AccountsOverviewPage';
 import { AccountServicesPanel } from '../../src/ui/components/AccountServicesPanel';
 import { ForgotLoginInfoPage } from '../../src/ui/pages/ForgotLoginInfoPage';
+import { AccountDetailsPage } from '../../src/ui/pages/AccountDetailsPage';
 
 export const test = base.extend<{
   homePage: HomePage;
@@ -11,6 +12,7 @@ export const test = base.extend<{
   accountsOverviewPage: AccountsOverviewPage;
   accountServicesPanel: AccountServicesPanel;
   forgotLoginInfoPage: ForgotLoginInfoPage;
+  accountDetailsPage: AccountDetailsPage;
 }>({
   homePage: async ({ page }, use) => {
     await use(new HomePage(page));
@@ -26,5 +28,8 @@ export const test = base.extend<{
   },
   forgotLoginInfoPage: async ({ page }, use) => {
     await use(new ForgotLoginInfoPage(page));
+  },
+  accountDetailsPage: async ({ page }, use) => {
+    await use(new AccountDetailsPage(page));
   },
 });
