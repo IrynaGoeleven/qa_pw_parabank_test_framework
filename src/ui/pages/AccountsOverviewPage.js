@@ -1,5 +1,5 @@
 import { expect } from '../../common/helpers/pwHelpers';
-import { parseAmount } from '../../common/helpers/stringHelpers';
+import { parseAmount, formatAmount } from '../../common/helpers/stringHelpers';
 import { BasePage } from './BasePage';
 
 export class AccountsOverviewPage extends BasePage {
@@ -80,5 +80,18 @@ export class AccountsOverviewPage extends BasePage {
 
       expect(total).toBeCloseTo(sum, 2);
     });
+  }
+
+  async assertAccountBalance(accountNumber, expectedBalance) {
+    await this.step(
+      `Assert balance of account ${accountNumber} is ${formatAmount(
+        expectedBalance,
+      )}`,
+      async () => {
+        await expect(
+          this.accountRow(accountNumber).locator('td').nth(1),
+        ).toHaveText(formatAmount(expectedBalance));
+      },
+    );
   }
 }

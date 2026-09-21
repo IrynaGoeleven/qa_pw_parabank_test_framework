@@ -5,6 +5,7 @@ import { AccountsOverviewPage } from '../../src/ui/pages/AccountsOverviewPage';
 import { AccountServicesPanel } from '../../src/ui/components/AccountServicesPanel';
 import { ForgotLoginInfoPage } from '../../src/ui/pages/ForgotLoginInfoPage';
 import { AccountDetailsPage } from '../../src/ui/pages/AccountDetailsPage';
+import { OpenNewAccountPage } from '../../src/ui/pages/OpenNewAccountPage';
 
 export const test = base.extend<{
   homePage: HomePage;
@@ -13,6 +14,7 @@ export const test = base.extend<{
   accountServicesPanel: AccountServicesPanel;
   forgotLoginInfoPage: ForgotLoginInfoPage;
   accountDetailsPage: AccountDetailsPage;
+  openNewAccountPage: OpenNewAccountPage;
 }>({
   homePage: async ({ page }, use) => {
     await use(new HomePage(page));
@@ -31,5 +33,8 @@ export const test = base.extend<{
   },
   accountDetailsPage: async ({ page }, use) => {
     await use(new AccountDetailsPage(page));
+  },
+  openNewAccountPage: async ({ page }, use) => {
+    await use(new OpenNewAccountPage(page));
   },
 });
