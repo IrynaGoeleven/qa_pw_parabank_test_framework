@@ -14,3 +14,15 @@ export function generateUser() {
     password: faker.string.alphanumeric(12),
   };
 }
+
+export function generatePayee() {
+  return {
+    name: faker.company.name(),
+    address: faker.location.streetAddress(),
+    city: faker.location.city(),
+    state: faker.location.state(),
+    zipCode: faker.location.zipCode('#####'),
+    phone: faker.string.numeric(10),
+    accountNumber: faker.string.numeric(5),
+  };
+}

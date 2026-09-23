@@ -15,7 +15,8 @@ for (const { title, amount } of invalidAmounts) {
   }) => {
     await allure.severity(allure.Severity.CRITICAL);
     await allure.description(
-      'Known UX issue: the app shows a generic "internal error" message instead of a field validation message.',
+      'Known UX issue: the app shows a generic "internal error" message '
+        + 'instead of a field validation message.',
     );
     const [from, to] = userWithTwoAccounts.accounts;
 
