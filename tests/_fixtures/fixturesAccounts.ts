@@ -3,6 +3,7 @@ import { test as authTest } from './fixturesAuth';
 export const test = authTest.extend<{
   userWithTwoAccounts;
   accountWithTransactions;
+  accountWithKnownTransaction;
 }>({
   userWithTwoAccounts: async (
     { registeredUser, accountsOverviewPage, openNewAccountPage },
@@ -52,5 +53,30 @@ export const test = authTest.extend<{
     });
 
     await use(mainAccount);
+  },
+  accountWithKnownTransaction: async (
+    { userWithTwoAccounts, transferFundsPage },
+    use,
+  ) => {
+    const [mainAccount, secondAccount] = userWithTwoAccounts.accounts;
+    const amount = (
+      Math.floor(Math.random() * 90) +
+      10 +
+      Math.random()
+    ).toFixed(2);
+
+    await transferFundsPage.open();
+    await transferFundsPage.transfer({
+      amount,
+      from: mainAccount,
+      to: secondAccount,
+    });
+    await transferFundsPage.assertTransferComplete({
+      amount: Number(amount),
+      from: mainAccount,
+      to: secondAccount,
+    });
+
+    await use({ account: mainAccount, amount: Number(amount) });
   },
 });
