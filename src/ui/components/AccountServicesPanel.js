@@ -26,4 +26,10 @@ export class AccountServicesPanel extends BasePage {
       },
     );
   }
+
+  async assertPanelIsVisible() {
+    await this.step('Assert Account Services menu is visible', async () => {
+      await expect(this.panel.getByText('Account Services')).toBeVisible();
+    });
+  }
 }
