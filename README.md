@@ -31,6 +31,12 @@ npm install -g allure-commandline
 Run all tests:
 
 ```
+npx playwright test
+```
+
+or, using the npm script:
+
+```
 npm test
 ```
 
@@ -77,6 +83,13 @@ results into the `allure-results` folder. Allure requires Java 8 or higher and
 the `allure-commandline` tool (see the installation steps above).
 
 Generate the report and open it in a browser:
+
+```
+allure generate ./allure-results --clean -o ./allure-report
+allure open ./allure-report
+```
+
+The same commands are available as npm scripts:
 
 ```
 npm run report:generate
