@@ -64,19 +64,23 @@ export class AccountDetailsPage extends BasePage {
 
   async assertAllTransactionsOfType(type) {
     await this.step(`Assert all transactions are of type ${type}`, async () => {
-      const debits = await this.getColumnValues(3);
-      const credits = await this.getColumnValues(4);
-      const [filledColumn, emptyColumn] =
-        type === 'Debit' ? [debits, credits] : [credits, debits];
+      const [filledColumn, emptyColumn] = type === 'Debit' ? [3, 4] : [4, 3];
 
-      expect(
-        filledColumn.every(value => value !== ''),
-        `Every row must have a ${type} amount`,
-      ).toBe(true);
-      expect(
-        emptyColumn.every(value => value === ''),
-        `No row may have an amount in the opposite column`,
-      ).toBe(true);
+      await expect
+        .poll(
+          async () => {
+            const filled = await this.getColumnValues(filledColumn);
+            const empty = await this.getColumnValues(emptyColumn);
+
+            return (
+              filled.length > 0 &&
+              filled.every(value => value !== '') &&
+              empty.every(value => value === '')
+            );
+          },
+          { message: `All rows must contain only a ${type} amount` },
+        )
+        .toBe(true);
     });
   }
 

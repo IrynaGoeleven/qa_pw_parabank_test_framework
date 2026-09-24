@@ -8,10 +8,10 @@ for (const type of ['Debit', 'Credit']) {
     accountWithTransactions,
     accountDetailsPage,
   }) => {
-    test.fail(
-      true,
-      'Known bug: the Type filter is ignored, all transactions are shown',
-    );
+    // test.fail(
+    //   true,
+    //   'Known bug: the Type filter is ignored, all transactions are shown',
+    // );
     await allure.severity(allure.Severity.NORMAL);
     await allure.tag('known-bug');
 

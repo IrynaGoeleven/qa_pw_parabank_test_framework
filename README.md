@@ -28,8 +28,77 @@ npm install -g allure-commandline
 
 ## How to run the tests
 
-// TODO - It's part of your task to add the appropriate instructions here. 
+Run all tests:
+
+```
+npm test
+```
+
+Run a specific suite:
+
+```
+npm run test:not-logged-in
+npm run test:logged-in
+```
+
+Run a single file or filter tests by name:
+
+```
+npx playwright test tests/loggedInUser/payments/billPay
+npx playwright test -g "Sign in with valid credentials"
+```
+
+Run in headed mode or in the Playwright UI mode for debugging:
+
+```
+npm run test:headed
+npm run test:ui
+```
+
+### Notes on the test environment
+
+The tests run against the public ParaBank demo application, which is shared
+between all its users and protected by Cloudflare. Because of that:
+
+- Each test creates its own user via a fixture, so the tests do not depend on
+  any pre-existing account.
+- Static resources (images, fonts) are blocked in tests to reduce the number of
+  requests sent to the demo site.
+- The tests run sequentially (`workers: 1`). Running them in parallel triggers
+  the bot protection of the demo site.
+- Occasional failures on registration or page load usually mean the demo site is
+  rate limiting the requests, not that the application is broken. Check the
+  screenshot attached to the failed test to confirm.
 
 ## How to generate report
 
-// TODO - It's part of your task to add the appropriate instructions here. 
+The tests are executed with the Allure reporter, so every run writes its raw
+results into the `allure-results` folder. Allure requires Java 8 or higher and
+the `allure-commandline` tool (see the installation steps above).
+
+Generate the report and open it in a browser:
+
+```
+npm run report:generate
+npm run report:open
+```
+
+Or generate a temporary report and open it in one command:
+
+```
+npm run report
+```
+
+The results of several runs are accumulated in `allure-results`. Delete the
+folder before a run to report on that run only.
+
+The report contains:
+
+- the test tree under **Suites**, built automatically from the test folder
+  structure (`parentSuite` / `suite` / `subSuite`);
+- the steps of every test, including the actions and assertions of the page
+  objects;
+- the severity of every test;
+- screenshots and traces attached to the failed tests;
+- the tests marked with the `known-bug` tag, which document the defects found in
+  the application.
