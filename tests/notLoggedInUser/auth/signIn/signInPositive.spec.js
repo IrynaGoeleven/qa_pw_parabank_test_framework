@@ -9,11 +9,11 @@ test('Sign in with valid credentials', async ({
 }) => {
   await allure.severity(allure.Severity.BLOCKER);
 
+  const { username, password } = existingUser;
+
   await homePage.open();
-  await homePage.login(existingUser.username, existingUser.password);
+  await homePage.login(username, password);
   await accountsOverviewPage.assertOpened();
-  await accountServicesPanel.assertWelcomeMessage(
-    existingUser.firstName,
-    existingUser.lastName,
+  await accountServicesPanel.assertWelcomeMessage(firstName, lastName);
   );
 });
